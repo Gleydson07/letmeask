@@ -7,8 +7,10 @@ import logInImg from '../assets/images/log-in.svg'
 import { Link } from 'react-router-dom'
 
 import '../styles/newRoom.scss'
+import { useAuth } from '../components/context/AuthContext'
 
 export default function NewRoom() {
+    // const { user } = useAuth();
     return(
         <div className="container">
             <aside>

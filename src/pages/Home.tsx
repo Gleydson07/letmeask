@@ -1,7 +1,5 @@
 import { useHistory } from 'react-router-dom'
 
-import { auth, firebase } from '../services/firebase'
-
 import { Button } from '../components/Button'
 
 import illustrationImg from '../assets/images/illustration.svg'
@@ -18,10 +16,10 @@ export function Home(){
 
     async function handleCreateRoom(){
         if(!user){
-            signInWithGoogle();
+            await signInWithGoogle();
+            history.push('/rooms/new')
         }
 
-        history.push('/rooms/new')
     }
     return (
         <div className="container">
@@ -35,7 +33,7 @@ export function Home(){
                     <img src={logoImg} alt="Letmeask" />
                     <button
                         className="create-room"
-                        onClick={signInWithGoogle}
+                        onClick={handleCreateRoom}
                     >
                         <img src={googleIconImg} alt="Logo do Google" />
                         Crie sua sala com o Google

@@ -2,5 +2,7 @@
 
 ## Aplicação react para salas de aula
 
-#### 2º dia = 
+#### 1º dia = together
+
+#### 2º dia = unidade
 ######    CREATE REACT APP AINDA NÃO POSSUI SUPORTE À VERSÃO 6.0
