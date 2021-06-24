@@ -5,4 +5,7 @@
 #### 1º dia = together
 
 #### 2º dia = unidade
-######    CREATE REACT APP AINDA NÃO POSSUI SUPORTE À VERSÃO 6.0
+######      CREATE REACT APP AINDA NÃO POSSUI SUPORTE À VERSÃO 6.0 DO SASS
+
+#### 3º dia = embuscadeevolução
+######      
