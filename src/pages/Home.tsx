@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { useAuth } from '../components/hooks/useAuth'
@@ -18,6 +18,8 @@ export function Home(){
     const { user, signInWithGoogle } = useAuth();
     const history = useHistory();
     const [roomCode, setRoomCode] = useState('')
+
+    useEffect(() => {}, [user])
 
     async function handleCreateRoom(){
         if(!user){

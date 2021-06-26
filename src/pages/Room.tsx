@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import { useAuth } from '../components/hooks/useAuth'
 import { useRoom } from '../components/hooks/useRoom'
@@ -7,8 +7,10 @@ import { useRoom } from '../components/hooks/useRoom'
 import { Button } from '../components/Button'
 import { RoomCode } from '../components/RoomCode'
 import { Question } from '../components/Question'
+import { SwitchButton } from '../components/SwitchButton'
 
 import logoImg from '../assets/images/logo.svg'
+import { IoExitOutline } from 'react-icons/io5'
 
 import '../styles/room.scss'
 import { database } from '../services/firebase'
@@ -18,11 +20,12 @@ type RoomParams = {
 }
 
 export default function Room(){
-    const {user} = useAuth();
+    const {user, signOut} = useAuth();
     const params = useParams<RoomParams>();
     const roomId = params.id;
     const {title, questions} = useRoom(roomId)
     const [newQuestion, setNewQuestion] = useState('');
+    const history = useHistory();
 
     async function handleSendNewQuestion(event: FormEvent){
         event.preventDefault();
@@ -57,12 +60,24 @@ export default function Room(){
         }
     }
 
+    async function handleCreateRoom(){
+        if(!user){
+            history.push('/')
+        }
+    }
+
     return (
         <div id="page-room">
             <header>
                 <div className="content">
                     <img src={logoImg} alt="Letmeask" />
-                    <RoomCode code={roomId}/>
+                    <div>
+                        <SwitchButton />
+                        <RoomCode code={roomId}/>
+                        <button className="user-exit" onClick={() => signOut()}>
+                            <IoExitOutline/>
+                        </button>
+                    </div>
                 </div>
             </header>
             <main>
@@ -84,7 +99,7 @@ export default function Room(){
                                 <span>{user.name}</span>
                             </div>
                         ) : (
-                            <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
+                            <span>Para enviar uma pergunta, <button onClick={handleCreateRoom}>faça seu login</button>.</span>
                         )}
                         <Button type="submit" disabled={!user}>Enviar pergunta</Button>
                     </div>

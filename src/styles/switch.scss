@@ -1,0 +1,26 @@
+.switch{
+    width: 2.5rem;
+    border-radius: 50%;
+
+    border: 1px solid #835afd;
+    background: #835afd;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover{
+        background-color: #835afd;
+        svg{
+            color: #fff;
+        }
+    }
+
+    svg{
+        font-size: 1.75rem;
+        color: #fff;
+    }
+}

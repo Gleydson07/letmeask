@@ -32,7 +32,7 @@ export default function NewRoom() {
         });
         const { key } = firebaseRoom;
 
-        history.push(`/rooms/${key}`)
+        history.push(`/admin/rooms/${key}`)
 
     }
 

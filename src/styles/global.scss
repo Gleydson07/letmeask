@@ -7,7 +7,25 @@
 body{
     background: #f8f8f8;
     color: #29292e;
+
+    span, p{
+        color: #737380
+    }
 }
+
+.dark{
+    background: #070707;
+    color: #f8f8f8;
+}
+
+.switch-dark{
+    background: #f8f8f8;
+
+    svg{
+        color: #835afd;
+    }
+}
+
 
 body, input, button, textarea {
     font: 400 16px 'Roboto', sans-serif;

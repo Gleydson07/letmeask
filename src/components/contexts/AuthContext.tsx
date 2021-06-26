@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createContext, ReactNode, useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import {firebase, auth } from '../../services/firebase';
 
@@ -16,12 +17,14 @@ type User = {
 interface IAuthContextProps {
     user: User | undefined,
     signInWithGoogle: () =>  Promise<void>;
+    signOut: () =>  Promise<void>;
 }
 
 export const AuthContext = createContext({} as IAuthContextProps);
 
 export const AuthProvider = ({children}: ProviderProps) => {
     const [user, setUser] = useState<User>();
+    const history = useHistory();
 
     useEffect(() => {
         const unsusbscribe = auth.onAuthStateChanged(user => {
@@ -45,6 +48,12 @@ export const AuthProvider = ({children}: ProviderProps) => {
         }
     }, [])
 
+    async function signOut(){
+        setUser(undefined)
+        await firebase.auth().signOut();        
+        history.push('/')
+    }
+
     async function signInWithGoogle(){
         const provider = new firebase.auth.GoogleAuthProvider();
         const result = await auth.signInWithPopup(provider);
@@ -65,7 +74,7 @@ export const AuthProvider = ({children}: ProviderProps) => {
     }
 
     return (
-        <AuthContext.Provider value={{user, signInWithGoogle}}>
+        <AuthContext.Provider value={{user, signInWithGoogle, signOut}}>
             {children}
         </AuthContext.Provider>
     )

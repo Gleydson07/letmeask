@@ -5,24 +5,28 @@ import { useRoom } from '../components/hooks/useRoom'
 import { Button } from '../components/Button'
 import { RoomCode } from '../components/RoomCode'
 import { Question } from '../components/Question'
+import { SwitchButton } from '../components/SwitchButton'
 
 import logoImg from '../assets/images/logo.svg'
 import deleteImg from '../assets/images/delete.svg'
 import checkImg from '../assets/images/check.svg'
 import answerImg from '../assets/images/answer.svg'
+import { IoExitOutline } from 'react-icons/io5'
 
 import '../styles/room.scss'
 import { database } from '../services/firebase'
+import { useAuth } from '../components/hooks/useAuth'
 
 type RoomParams = {
     id: string
 }
 
 export default function AdminRoom(){
+    const {signOut} = useAuth();
+    const history = useHistory();
     const params = useParams<RoomParams>();
     const roomId = params.id;
     const {title, questions} = useRoom(roomId);
-    const history = useHistory();
 
     async function handleCheckQuestionAsAnswered(questionId: string){
         await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
@@ -47,7 +51,7 @@ export default function AdminRoom(){
             endedAt: new Date()
         })
 
-        history.push(`/`);
+        history.push(`/rooms/new`);
     }
 
     return (
@@ -56,8 +60,12 @@ export default function AdminRoom(){
                 <div className="content">
                     <img src={logoImg} alt="Letmeask" />
                     <div>
+                        <SwitchButton />
                         <RoomCode code={roomId}/>
                         <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
+                        <button className="user-exit" onClick={() => signOut()}>
+                            <IoExitOutline/>
+                        </button>
                     </div>
                 </div>
             </header>
