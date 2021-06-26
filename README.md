@@ -45,4 +45,6 @@ Agora você pode acessar [`localhost:3000`](http://localhost:3000) no seu navega
 
 ---
 
-Feito por Gleydson Albuquerque no 6° NLW organizado pela Rocketseat, missão: ReactJS.
+<p>Feito por Gleydson Albuquerque no 6° NLW organizado pela Rocketseat, missão: ReactJS.</p>
+
+Me encontre [aqui](https://www.linkedin.com/in/gleydson07/).
